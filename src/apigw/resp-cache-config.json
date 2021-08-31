@@ -1,0 +1,16 @@
+{
+  "type": "EXTERNAL_RESP_CACHE",
+  "servers": [
+    {
+      "host": "cache.example.com",
+      "port": 6379
+    }
+  ],
+  "authenticationSecretId": "<ocid-secret>",
+  "authenticationSecretVersionNumber": 1,
+  "isSSLEnabled": true,
+  "isSSLVerifyDisabled": false,
+  "connectTimeoutInMs": 1000,
+  "readTimeoutInMs": 250,
+  "sendTimeoutInMs": 1000
+}

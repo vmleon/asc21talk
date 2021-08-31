@@ -1,0 +1,38 @@
+{
+  "requestPolicies": {
+    "rateLimiting": {
+      "rateKey": "Total",
+      "rateInRequestsPerSecond": 10
+    }
+  },
+  "routes": [
+    {
+      "path": "iseven",
+      "methods": ["GET"],
+      "backend": {
+        "type": "ORACLE_FUNCTIONS_BACKEND",
+        "functionId": "<identifier>"
+      },
+      "requestPolicies": {
+        "rateLimiting": {
+          "rateKey": "CLIENT_IP",
+          "rateInRequestsPerSecond": 3
+        }
+      }
+    },
+    {
+      "path": "assign",
+      "methods": ["POST"],
+      "backend": {
+        "type": "ORACLE_FUNCTIONS_BACKEND",
+        "functionId": "<identifier>"
+      },
+      "requestPolicies": {
+        "rateLimiting": {
+          "rateKey": "CLIENT_IP",
+          "rateInRequestsPerSecond": 3
+        }
+      }
+    }
+  ]
+}
