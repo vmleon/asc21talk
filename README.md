@@ -2,7 +2,8 @@
 
 ## Extend your API with Serverless and API Gateways
 
-- Time: 10 minutes
+- Duration: 10 minutes
+- Time: Tuesday, 28 Sep 20:20 CET
 
 ## Table of Content
 

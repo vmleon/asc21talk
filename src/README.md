@@ -4,35 +4,57 @@
 
 - Create **VCN** with **Public** and **Private** Subnet
 - Add **Ingress** Security Rule on **Public** subnet on port **443**
-- Add **Dynamic Group** `All {resource.type='ApiGateway', resource.compartment.id='<compartment-ocid>'}` 
-- Add **Policy** `Allow dynamic-group <dynamic-group-name> to use functions-family in compartment <compartment-name>`
-- Create Functions **Application**
-- **Deploy** the functions
+- Add **Dynamic Group** `apigwdynamicgroup` with matching rule `All {resource.type='ApiGateway', resource.compartment.id='<COMPARTMENT-OCID>'}` 
+- Add **Policy** `apigw-functions` with policy rule `Allow dynamic-group <DYNAMIC-GROUP-NAME> to use functions-family in compartment <COMPARTMENT-NAME>`
+- Create Functions **Application** `app-asc` on the private subnet
+- **Deploy** the functions, after configure Cloud Shell
 
 ## Config Cloud Shell for Functions
 
-Region data (ex, home region)
+List the context (different regions where you can operate)
 ```bash
-oci iam region-subscription list --query 'data[?"is-home-region"] | [0]'
+fn list context
 ```
 
-Namespace
+The env variable `OCI_REGION` has the region/context you want to use
+```bash
+fn use context $OCI_REGION
+```
+
+Get your own compartment searching by name or use the root compartment from env variable `OCI_TENANCY` (to use in next step):
+```bash
+oci iam compartment list --name "<COMPARTMENT-NAME>" --query "data[].id"
+```
+
+Update compartment to work obtained in previous step or root compartment `$OCI_TENANCY`
+```bash
+fn update context oracle.compartment-id <COMPARTMENT-OCID>
+```
+
+Get tenancy namespace (to use in next step)
 ```bash
 oci os ns get --query 'data'
 ```
 
-User
+Get region key name (to use in next step)
 ```bash
-XXX
+oci iam region list --query "data[?name=='$OCI_REGION'] | [0].key" | tr [:upper:] [:lower:] | tr -d '" '
 ```
 
-
 ```bash
-fn list context
-fn use context <region>
-fn update context oracle.compartment-id <compartment-ocid>
-fn update context registry <REGION>.ocir.io/<namespace>/<repo-name>
-docker login -u '<namespace>/oracleidentitycloudservice/victor.martin.alvarez@oracle.com' <REGION>.ocir.io
+fn update context registry <REGION-KEY>.ocir.io/<NAMESPACE>/app-asc
+```
+
+Get your user name (to use in next step)
+```bash
+oci iam user list --name "oracleidentitycloudservice/<YOUR-EMAIL>" --query "data[].name"
+```
+
+Create a Auth token for the user.
+
+Login with docker
+```bash
+docker login -u '<NAMESPACE>/oracleidentitycloudservice/<YOUR-EMAIL>' <REGION-KEY>.ocir.io
 ```
 
 ## Is Even

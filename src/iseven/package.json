@@ -6,6 +6,7 @@
   "author": "victor.martin.alvarez@oracle.com",
   "license": "Apache-2.0",
   "dependencies": {
-    "@fnproject/fdk": ">=0.0.26"
+    "@fnproject/fdk": ">=0.0.26",
+    "pino": "^7.0.0-rc.3"
   }
 }
