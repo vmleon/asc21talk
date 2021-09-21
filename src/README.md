@@ -4,7 +4,7 @@
 
 ### Networking
 
-Create **VCN** with **Public** and **Private** Subnet
+Create **VCN** `mynetwork` with **Public** and **Private** Subnet
 
 Add **Ingress** Security Rule on **Public** subnet on port **443**
 
