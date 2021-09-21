@@ -19,13 +19,18 @@ Get the function OCID for `iseven` (to use in next step):
 oci fn function list --query 'data[].[id, "display-name"]' --application-id <APPLICATION-OCID>
 ```
 
-On the file [deployment.template.json](deployment.template.json), rename it to `deployment.json` and replace `FUNCTION-OCID` with the value from previous step.
+On the file [deployment.template.json](deployment.template.json), rename it to `deployment.json`
+```bash
+cp src/apigw/deployment.template.json src/apigw/deployment.json
+```
+
+And replace `FUNCTION-OCID` with the value from previous step.
 
 Create a **Deployment** `asc-demo` with **Upload an existing Deployment API** and Path prefix `/api/v1`.
 
 When `Active`, test endpoint
 ```bash
-curl -s <DEPLOYMENT_ENDPOINT>/iseven | jq .
+curl -s <DEPLOYMENT_ENDPOINT>/iseven/3 | jq .
 ```
 
 ## Redis
