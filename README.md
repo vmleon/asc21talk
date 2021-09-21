@@ -18,3 +18,9 @@
 ## Demo
 
 [Demo Source code](src/README.md)
+
+Ship the content
+
+```
+git archive --format zip --output ~/Downloads/asc21talk.zip main
+```
