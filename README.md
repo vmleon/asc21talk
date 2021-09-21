@@ -24,3 +24,13 @@ Ship the content
 ```
 git archive --format zip --output ~/Downloads/asc21talk.zip main
 ```
+
+### Clean up
+
+- Delete `asc-demo` Deployment
+- Delete `asc-apigw` API Gateway
+- Delete `iseven` Function
+- Delete `app-asc` Application
+- Delete `app_asc_invoke`, `asc_demo_execution` and `asc_demo_access` Logs from `Default_Group` Log Group
+- Delete `app-asc/iseven` repo from Container Registry (root compartment)
+- Delete `mynetwork` VCN
