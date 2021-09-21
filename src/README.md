@@ -1,15 +1,30 @@
-# Endpoint Services
+# Demo
 
-## API Gateway
+## Prerequisites
 
-- Create **VCN** with **Public** and **Private** Subnet
-- Add **Ingress** Security Rule on **Public** subnet on port **443**
-- Add **Dynamic Group** `apigwdynamicgroup` with matching rule `All {resource.type='ApiGateway', resource.compartment.id='<COMPARTMENT-OCID>'}` 
-- Add **Policy** `apigw-functions` with policy rule `Allow dynamic-group <DYNAMIC-GROUP-NAME> to use functions-family in compartment <COMPARTMENT-NAME>`
-- Create Functions **Application** `app-asc` on the private subnet
-- **Deploy** the functions, after configure Cloud Shell
+### Networking
 
-## Config Cloud Shell for Functions
+Create **VCN** with **Public** and **Private** Subnet
+
+Add **Ingress** Security Rule on **Public** subnet on port **443**
+
+### Security
+
+Add **Dynamic Group** `apigwdynamicgroup` with matching rule:
+```
+All {resource.type='ApiGateway', resource.compartment.id='<COMPARTMENT-OCID>'}
+```
+
+Add **Policy** `apigw-functions` with policy rule:
+```
+Allow dynamic-group <DYNAMIC-GROUP-NAME> to use functions-family in compartment <COMPARTMENT-NAME>
+```
+
+## Serverless
+
+Create Functions **Application** `app-asc` on the private subnet
+
+### Config Cloud Shell for Functions
 
 List the context (different regions where you can operate)
 ```bash
@@ -57,14 +72,14 @@ Login with docker
 docker login -u '<NAMESPACE>/oracleidentitycloudservice/<YOUR-EMAIL>' <REGION-KEY>.ocir.io
 ```
 
-## Is Even
+### Is Even Deployment
 
 Go to `iseven` folder:
 ```bash
-cd iseven
+cd src/iseven
 ```
 
 Deploy function into application
 ```bash
-fn deploy --app iseven
+fn deploy --app app-asc
 ```
