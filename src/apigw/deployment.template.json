@@ -1,0 +1,18 @@
+{
+  "requestPolicies": {
+    "rateLimiting": {
+      "rateKey": "CLIENT_IP",
+      "rateInRequestsPerSecond": 10
+    }
+  },
+  "routes": [
+    {
+      "path": "/iseven/{number}",
+      "methods": ["GET"],
+      "backend": {
+        "type": "ORACLE_FUNCTIONS_BACKEND",
+        "functionId": "<FUNCTION-OCID>"
+      }
+    }
+  ]
+}

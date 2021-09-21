@@ -20,12 +20,11 @@ function getNumber(input, ctx) {
   if (input && input.number) {
     return parseInt(input.number);
   }
-  const { httpGateway = {} } = ctx.httpGateway;
-  const { requestURL = '' } = httpGateway;
-  logger.debug(`Request URL ${requestURL}`);
+  const requestURL = ctx.headers['Fn-Http-Request-Url'].toString();
+  logger.info(`Request URL ${requestURL}`);
   if (requestURL) {
-    const number = parseInt(requestURL.split('number/')[1]);
-    logger.debug(`Number ${number}`);
+    const number = parseInt(requestURL.split('iseven/')[1]);
+    logger.info(`Number ${number}`);
     return number;
   }
   return;

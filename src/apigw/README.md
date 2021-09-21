@@ -1,5 +1,32 @@
 # API Gateway Notes
 
+## Provision API Gateway
+
+Create an **API Gateway** `asc-apigw` on the **public** subnet.
+
+Get your own compartment searching by name or use the root compartment from env variable `OCI_TENANCY` (to use in next step):
+```bash
+oci iam compartment list --name "<COMPARTMENT-NAME>" --query "data[].id"
+```
+
+Get the application OCID for `app-asc` (to use in next step):
+```bash
+oci fn application list --query 'data[].[id,"display-name"]' -c <COMPARTMENT-OCID>
+```
+
+Get the function OCID for `iseven` (to use in next step):
+```bash
+oci fn function list --query 'data[].[id, "display-name"]' --application-id <APPLICATION-OCID>
+```
+
+On the file [deployment.template.json](deployment.template.json), rename it to `deployment.json` and replace `FUNCTION-OCID` with the value from previous step.
+
+Create a **Deployment** `asc-demo` with **Upload an existing Deployment API** and Path prefix `/api/v1`.
+
+When `Active`, test endpoint
+```bash
+curl -s <DEPLOYMENT_ENDPOINT>/iseven | jq .
+```
 
 ## Redis
 
@@ -39,3 +66,27 @@ Bastion host for connecting.
 - Create a Vault `asc21`
 - Create a Master Encryption Key `asc21masterkey`
 - Create a secret `redispass`
+
+## Observability
+
+Default log groups:
+
+```
+vmartin/Default_Group/app_asc_invoke
+
+vmartin/Default_Group/asc_demo_access
+
+vmartin/Default_Group/asc_demo_execution
+```
+
+### Access Logs
+
+XXX
+
+### Execution Logs
+
+XXX
+
+### Function Invocation Logs
+
+XXX
