@@ -19,7 +19,7 @@ Get the function OCID for `iseven` (to use in next step):
 oci fn function list --query 'data[].[id, "display-name"]' --application-id <APPLICATION-OCID>
 ```
 
-On the file [deployment.template.json](deployment.template.json), rename it to `deployment.json`
+From local computer, on the file [deployment.template.json](deployment.template.json), rename it to `deployment.json`
 ```bash
 cp src/apigw/deployment.template.json src/apigw/deployment.json
 ```
@@ -37,9 +37,11 @@ curl -s <DEPLOYMENT_ENDPOINT>/iseven/3 | jq .
 
 API Gateway Cache feature requires Redis.
 
-You are going to provision a compute on private Subnet for Redis server.
+Provision a **compute** `redis` on **private** Subnet for Redis server.
 
-Bastion host for connecting.
+Enable **Bastion plugin**.
+
+**Bastion** host with target **Private** Subnet. Create a **Session** for the redis instance.
 
 ### Compute instance and Redis service
 
@@ -70,7 +72,18 @@ Bastion host for connecting.
 
 - Create a Vault `asc21`
 - Create a Master Encryption Key `asc21masterkey`
-- Create a secret `redispass`
+- Create a secret `redispass` with
+```
+{"password":"<REDIS-PASSWORD>"}
+```
+
+Edit API Gateway `asc-apigw` with caching.
+
+Test with `hey`
+
+```
+hey -n 100 -c 1 -q 2 <GW_ENDPOINT>/api/v1/iseven/1
+```
 
 ## Observability
 

@@ -2,6 +2,8 @@
 
 ## Prerequisites
 
+Create a compartment `asc21`
+
 ### Networking
 
 Create **VCN** `mynetwork` with **Public** and **Private** Subnet
@@ -10,19 +12,25 @@ Add **Ingress** Security Rule on **Public** subnet on port **443**
 
 ### Security
 
+> Get compartment OCID
+> ```
+> oci iam compartment list --name asc21 --query data[].id
+> ```
+
 Add **Dynamic Group** `apigwdynamicgroup` with matching rule:
 ```
 All {resource.type='ApiGateway', resource.compartment.id='<COMPARTMENT-OCID>'}
 ```
 
-Add **Policy** `apigw-functions` with policy rule:
+Add **Policy** `apigw-functions-secrets` with policy rule:
 ```
-Allow dynamic-group <DYNAMIC-GROUP-NAME> to use functions-family in compartment <COMPARTMENT-NAME>
+Allow dynamic-group apigwdynamicgroup to use functions-family in compartment asc21
+Allow dynamic-group apigwdynamicgroup to read secret-bundles in compartment asc21
 ```
 
 ## Serverless
 
-Create Functions **Application** `app-asc` on the private subnet
+Create Functions **Application** `app-asc` on the **private** subnet
 
 ### Config Cloud Shell for Functions
 
@@ -83,3 +91,5 @@ Deploy function into application
 ```bash
 fn deploy --app app-asc
 ```
+
+Go to [APIGW README](apigw/README.md)

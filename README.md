@@ -25,6 +25,11 @@ Ship the content
 git archive --format zip --output ~/Downloads/asc21talk.zip main
 ```
 
+Unzip:
+```
+unzip -d asc21talk asc21talk.zip
+```
+
 ### Clean up
 
 - Delete `asc-demo` Deployment
@@ -34,3 +39,5 @@ git archive --format zip --output ~/Downloads/asc21talk.zip main
 - Delete `app_asc_invoke`, `asc_demo_execution` and `asc_demo_access` Logs from `Default_Group` Log Group
 - Delete `app-asc/iseven` repo from Container Registry (root compartment)
 - Delete `mynetwork` VCN
+- Delete `apigw-functions` Policy
+- Delete `apigwdynamicgroup` Dynamic Group
