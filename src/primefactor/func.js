@@ -1,6 +1,6 @@
 const fdk = require('@fnproject/fdk');
 const logger = require('pino')();
-const { isEvenNumber, isValidNumber } = require('./utils.js');
+const { getPrimeFactors, isValidNumber } = require('./utils.js');
 
 fdk.handle(function (input, ctx) {
   const number = getNumber(input, ctx);
@@ -12,8 +12,8 @@ fdk.handle(function (input, ctx) {
     logger.error(`Number ${number} is not a number`);
     return { error: true, number, msg: 'Not a number' };
   }
-  const isEven = isEvenNumber(number);
-  return { number, isEven };
+  const primeFactors = getPrimeFactors(number);
+  return { number, primeFactors };
 });
 
 function getNumber(input, ctx) {
@@ -23,7 +23,7 @@ function getNumber(input, ctx) {
   const requestURL = ctx.headers['Fn-Http-Request-Url'].toString();
   logger.info(`Request URL ${requestURL}`);
   if (requestURL) {
-    const number = parseInt(requestURL.split('iseven/')[1]);
+    const number = parseInt(requestURL.split('primefactors/')[1]);
     logger.info(`Number ${number}`);
     return number;
   }

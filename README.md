@@ -34,10 +34,10 @@ unzip -d asc21talk asc21talk.zip
 
 - Delete `asc-demo` Deployment
 - Delete `asc-apigw` API Gateway
-- Delete `iseven` Function
+- Delete `primefactors` Function
 - Delete `app-asc` Application
 - Delete `app_asc_invoke`, `asc_demo_execution` and `asc_demo_access` Logs from `Default_Group` Log Group
-- Delete `app-asc/iseven` repo from Container Registry (root compartment)
+- Delete `app-asc/primefactors` repo from Container Registry (root compartment)
 - Delete `mynetwork` VCN
 - Delete `apigw-functions` Policy
 - Delete `apigwdynamicgroup` Dynamic Group

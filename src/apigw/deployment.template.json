@@ -2,12 +2,12 @@
   "requestPolicies": {
     "rateLimiting": {
       "rateKey": "CLIENT_IP",
-      "rateInRequestsPerSecond": 10
+      "rateInRequestsPerSecond": 30
     }
   },
   "routes": [
     {
-      "path": "/iseven/{number}",
+      "path": "/primefactors/{number}",
       "methods": ["GET"],
       "backend": {
         "type": "ORACLE_FUNCTIONS_BACKEND",

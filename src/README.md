@@ -80,11 +80,11 @@ Login with docker
 docker login -u '<NAMESPACE>/oracleidentitycloudservice/<YOUR-EMAIL>' <REGION-KEY>.ocir.io
 ```
 
-### Is Even Deployment
+### Prime Factors Deployment
 
-Go to `iseven` folder:
+Go to `primefactors` folder:
 ```bash
-cd src/iseven
+cd src/primefactors
 ```
 
 Deploy function into application

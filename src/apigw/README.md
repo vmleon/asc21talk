@@ -14,7 +14,7 @@ Get the application OCID for `app-asc` (to use in next step):
 oci fn application list --query 'data[].[id,"display-name"]' -c <COMPARTMENT-OCID>
 ```
 
-Get the function OCID for `iseven` (to use in next step):
+Get the function OCID for `primefactors` (to use in next step):
 ```bash
 oci fn function list --query 'data[].[id, "display-name"]' --application-id <APPLICATION-OCID>
 ```
@@ -30,7 +30,7 @@ Create a **Deployment** `asc-demo` with **Upload an existing Deployment API** an
 
 When `Active`, test endpoint
 ```bash
-curl -s <DEPLOYMENT_ENDPOINT>/iseven/3 | jq .
+curl -s <DEPLOYMENT_ENDPOINT>/primefactors/18 | jq .
 ```
 
 ## Redis
@@ -82,7 +82,7 @@ Edit API Gateway `asc-apigw` with caching.
 Test with `hey`
 
 ```
-hey -n 100 -c 1 -q 2 <GW_ENDPOINT>/api/v1/iseven/1
+hey -n 100 -c 1 -q 2 <GW_ENDPOINT>/api/v1/primefactors/1
 ```
 
 ## Observability

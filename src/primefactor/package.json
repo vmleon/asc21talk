@@ -1,7 +1,7 @@
 {
-  "name": "iseven",
+  "name": "primefactors",
   "version": "1.0.0",
-  "description": "Is Even Function",
+  "description": "Prime Factors Function",
   "main": "func.js",
   "author": "victor.martin.alvarez@oracle.com",
   "license": "Apache-2.0",
