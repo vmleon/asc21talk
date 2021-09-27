@@ -2,6 +2,8 @@
 
 ## Prerequisites
 
+A Free Oracle Cloud Account, [Sign-up here!](http://bit.ly/34TzwGf)
+
 Create a compartment `asc21`.
 
 > [Managing Compartments](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcompartments.htm)
