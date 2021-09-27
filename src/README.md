@@ -16,10 +16,10 @@ Add **Ingress** Security Rule on **Public** subnet for port **443**
 
 ### Security
 
-> Get compartment OCID
-> ```
-> oci iam compartment list --name asc21 --query data[].id
-> ```
+Get compartment OCID
+```
+oci iam compartment list --name asc21 --query data[].id
+```
 
 Add **Dynamic Group** `apigwdynamicgroup` with matching rule:
 > Change `COMPARTMENT-OCID` to the value from your compartment id
