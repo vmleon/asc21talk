@@ -97,4 +97,4 @@ Deploy function into application
 fn deploy --app app-asc
 ```
 
-Go to [APIGW README](apigw/README.md)
+Go to [API Gateway steps](apigw/README.md)
