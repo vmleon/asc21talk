@@ -6,17 +6,17 @@ Create an **API Gateway** `asc-apigw` on the **public** subnet.
 
 Get your own compartment searching by name or use the root compartment from env variable `OCI_TENANCY` (to use in next step):
 ```bash
-oci iam compartment list --name "<COMPARTMENT-NAME>" --query "data[].id"
+oci iam compartment list --name "COMPARTMENT-NAME" --query "data[].id"
 ```
 
 Get the application OCID for `app-asc` (to use in next step):
 ```bash
-oci fn application list --query 'data[].[id,"display-name"]' -c <COMPARTMENT-OCID>
+oci fn application list --query 'data[].[id,"display-name"]' -c COMPARTMENT-OCID
 ```
 
 Get the function OCID for `primefactors` (to use in next step):
 ```bash
-oci fn function list --query 'data[].[id, "display-name"]' --application-id <APPLICATION-OCID>
+oci fn function list --query 'data[].[id, "display-name"]' --application-id APPLICATION-OCID
 ```
 
 From local computer, on the file [deployment.template.json](deployment.template.json), rename it to `deployment.json`
@@ -29,15 +29,18 @@ And replace `FUNCTION-OCID` with the value from previous step.
 Create a **Deployment** `asc-demo` with **Upload an existing Deployment API** and Path prefix `/api/v1`.
 
 When `Active`, test endpoint
+> Change `DEPLOYMENT_ENDPOINT` with the specific API Deployment URL endpoint
 ```bash
-curl -s <DEPLOYMENT_ENDPOINT>/primefactors/18 | jq .
+curl -s DEPLOYMENT_ENDPOINT/primefactors/28 | jq .
 ```
 
 ## Redis
 
-API Gateway Cache feature requires Redis.
+OCI API Gateway Cache feature requires Redis.
 
 Provision a **compute** `redis` on **private** Subnet for Redis server.
+
+Add **Ingress** Security Rule on **Private** subnet for port **6379**
 
 Enable **Bastion plugin**.
 
@@ -74,37 +77,21 @@ Enable **Bastion plugin**.
 - Create a Master Encryption Key `asc21masterkey`
 - Create a secret `redispass` with
 ```
-{"password":"<REDIS-PASSWORD>"}
+{"password":"REDIS-PASSWORD"}
 ```
 
 Edit API Gateway `asc-apigw` with caching.
 
 Test with `hey`
-
+> You need to install `hey` tool (brew install for MacOS)
 ```
-hey -n 100 -c 1 -q 2 <GW_ENDPOINT>/api/v1/primefactors/1
+hey -n 100 -c 2 -q 10 <GW_ENDPOINT>/api/v1/primefactors/18
 ```
 
 ## Observability
 
-Default log groups:
+Enable **Access** and **Execution Logs** for API GW Deployment.
 
-```
-vmartin/Default_Group/app_asc_invoke
+Enable **Invocation Logs** for Function.
 
-vmartin/Default_Group/asc_demo_access
-
-vmartin/Default_Group/asc_demo_execution
-```
-
-### Access Logs
-
-XXX
-
-### Execution Logs
-
-XXX
-
-### Function Invocation Logs
-
-XXX
+Run again the test and check logs

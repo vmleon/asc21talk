@@ -2,13 +2,17 @@
 
 ## Prerequisites
 
-Create a compartment `asc21`
+Create a compartment `asc21`.
+
+> [Managing Compartments](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcompartments.htm)
 
 ### Networking
 
 Create **VCN** `mynetwork` with **Public** and **Private** Subnet
 
-Add **Ingress** Security Rule on **Public** subnet on port **443**
+Add **Ingress** Security Rule on **Public** subnet for port **443**
+
+> You can use **Cloud Shell** to perform all the `oci` CLI steps
 
 ### Security
 
@@ -18,8 +22,9 @@ Add **Ingress** Security Rule on **Public** subnet on port **443**
 > ```
 
 Add **Dynamic Group** `apigwdynamicgroup` with matching rule:
+> Change `COMPARTMENT-OCID` to the value from your compartment id
 ```
-All {resource.type='ApiGateway', resource.compartment.id='<COMPARTMENT-OCID>'}
+All {resource.type='ApiGateway', resource.compartment.id='COMPARTMENT-OCID'}
 ```
 
 Add **Policy** `apigw-functions-secrets` with policy rule:
@@ -70,14 +75,14 @@ fn update context registry <REGION-KEY>.ocir.io/<NAMESPACE>/app-asc
 
 Get your user name (to use in next step)
 ```bash
-oci iam user list --name "oracleidentitycloudservice/<YOUR-EMAIL>" --query "data[].name"
+oci iam user list --name "oracleidentitycloudservice/YOUR-EMAIL" --query "data[].name"
 ```
 
 Create a Auth token for the user.
 
 Login with docker
 ```bash
-docker login -u '<NAMESPACE>/oracleidentitycloudservice/<YOUR-EMAIL>' <REGION-KEY>.ocir.io
+docker login -u '<NAMESPACE>/oracleidentitycloudservice/YOUR-EMAIL' <REGION-KEY>.ocir.io
 ```
 
 ### Prime Factors Deployment

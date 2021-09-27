@@ -4,23 +4,14 @@
 
 - Duration: 10 minutes
 - Time: Tuesday, 28 Sep 20:20 CET
-
-## Table of Content
-
-- Intro Victor Martin
-- What is Serverless
-- What is API Gateways
-- API Spec
-- Demo
-- Wrap up
-- Q&A
   
 ## Demo
 
 [Demo Source code](src/README.md)
 
-Ship the content
+> Terraform scripts (pending)
 
+Generate zip with all content:
 ```
 git archive --format zip --output ~/Downloads/asc21talk.zip main
 ```
@@ -30,7 +21,7 @@ Unzip:
 unzip -d asc21talk asc21talk.zip
 ```
 
-### Clean up
+### Clean up (when done)
 
 - Delete `asc-demo` Deployment
 - Delete `asc-apigw` API Gateway
