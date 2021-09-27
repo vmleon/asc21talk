@@ -7,7 +7,7 @@
   
 ## Demo
 
-[Demo Source code](src/README.md)
+START HERE: [Demo Source code](src/README.md)
 
 > Terraform scripts (pending)
 
