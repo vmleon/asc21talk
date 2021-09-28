@@ -2,8 +2,8 @@
 
 ## Extend your API with Serverless and API Gateways
 
-- Duration: 10 minutes
-- Time: Tuesday, 28 Sep 20:20 CET
+Live presentation available at [Extend your API with Serverless and API Gateways](https://vmleon.github.io/asc21presentation/).
+Source code presentation [asc21presentation](https://github.com/vmleon/asc21presentation) repository.
   
 ## Demo
 
